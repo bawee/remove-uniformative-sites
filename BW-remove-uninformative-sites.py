@@ -6,6 +6,7 @@ from argparse import RawTextHelpFormatter
 from collections import Counter #for counting characters in a string
 from Bio import AlignIO
 
+
 def main():    
 
     #print args.input[0] #Prints out input file name
@@ -32,7 +33,7 @@ def main():
    
         #Print progress to stdout
         sys.stdout.write('\r')
-        sys.stdout.write("Processing column %s" % (i))
+        sys.stdout.write("Processing column %s     " % (i))
         sys.stdout.flush()
    
         column = alignment[:, i] #reads in column number i as a string
@@ -48,8 +49,6 @@ def main():
         else:
             listFinalColumns.append(i) #List of accepted columns
        
-    
-    sys.stdout.flush()
 
     
     finalAlignment = alignment[:, listFinalColumns[0]:listFinalColumns[0]+1] #initialise new Multiple seq alignment with the first column from listFinalColumns
@@ -63,9 +62,8 @@ def main():
         finalAlignment = finalAlignment + alignment[:, j:j+1]
         
         #Print progress to stdout
-        sys.stdout.flush()
         sys.stdout.write('\r')
-        sys.stdout.write("Appending column %s" % (j))
+        sys.stdout.write("Appending column %s   " % (j))
         sys.stdout.flush()
     
     #print finalAlignment #Print alignment object
@@ -102,6 +100,7 @@ Requires: BLAST+, ACT and BioPython on your PATH
     #unused arguments
     parser.add_argument("-f", "--format", action="store", help="Specify output format e.g. fasta or phylip'")
 
+    args = parser.parse_args()
 
 
     main() #run main script
