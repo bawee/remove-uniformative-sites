@@ -17,7 +17,7 @@ def main():
     
     #Check if output file given, if not use output prefix with input filename
     if not args.output:
-        output_file = "output." + args.input[0]
+        output_file = "informativeOnly." + args.input[0]
     else:
         output_file = args.output
         
@@ -68,11 +68,31 @@ def main():
     
     #print finalAlignment #Print alignment object
     print "\nFinal alignment contains %s columns" % (finalAlignment.get_alignment_length())
+    
+    
+    if args.collapse: #run this if --collapse flag is used. Removes identical sequences in the alignment.
+        listSeqs = {} #initialise list of sequences
+        
+        for k in finalAlignment: 
+            seq1 = str(k.seq).upper()
+        
+            if seq1 not in listSeqs:
+                listSeqs[seq1] = k.description
+            else:
+                listSeqs[seq1] += "\t" + k.description
+        
+        noIdenticalOutfile = open("no_identicals" + output_file,"w")
+        
+        for k in listSeqs:
+        	noIdenticalOutfile.write(">" + listSeqs[k] + "\n" + k +"\n")
+        
+        noIdenticalOutfile.close()
+
             
         
     AlignIO.write(finalAlignment, output_file, "fasta")
     
-    print "\nRemoved a total of %s columns, with %s columns informative columns remaining" % (len(listRemovedColumns), len(listFinalColumns))
+    print "\nRemoved a total of %s columns, with %s informative columns remaining" % (len(listRemovedColumns), len(listFinalColumns))
         
                 
 #subroutine to count occurrences of characters in a string
@@ -96,6 +116,8 @@ Requires: BLAST+, ACT and BioPython on your PATH
     parser.add_argument('input', nargs="+", action="store", help="Specify at least 2 input files")
     
     parser.add_argument("-o", "--output", action="store", default=False, help="Output file. Default ...")
+    parser.add_argument("-c", "--collapse", action="store_true", default=False, help="Collapse identical sequences, after removing uninformative.'")
+
 
     #unused arguments
     parser.add_argument("-f", "--format", action="store", help="Specify output format e.g. fasta or phylip'")
