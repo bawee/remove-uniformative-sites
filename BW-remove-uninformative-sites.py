@@ -81,7 +81,7 @@ def main():
             else:
                 listSeqs[seq1] += "\t" + k.description
         
-        noIdenticalOutfile = open("no_identicals" + output_file,"w")
+        noIdenticalOutfile = open("no_identicals." + output_file,"w")
         
         for k in listSeqs:
         	noIdenticalOutfile.write(">" + listSeqs[k] + "\n" + k +"\n")
@@ -116,7 +116,7 @@ Requires: BLAST+, ACT and BioPython on your PATH
     parser.add_argument('input', nargs="+", action="store", help="Specify at least 2 input files")
     
     parser.add_argument("-o", "--output", action="store", default=False, help="Output file. Default ...")
-    parser.add_argument("-c", "--collapse", action="store_true", default=False, help="Collapse identical sequences, after removing uninformative.'")
+    parser.add_argument("-c", "--collapse", action="store_true", default=False, help="Collapse identical sequences, after removing uninformative. A separate file is produced'")
 
 
     #unused arguments
