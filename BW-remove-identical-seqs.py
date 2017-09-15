@@ -5,9 +5,7 @@
 import sys, os
 import argparse
 from argparse import RawTextHelpFormatter
-from collections import Counter #for counting characters in a string
 from Bio import AlignIO
-from difflib import SequenceMatcher
 
 
 def main():
