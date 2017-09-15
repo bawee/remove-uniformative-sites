@@ -70,7 +70,7 @@ def restricted_float(x):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='''
-Remove identical sequences from a fasta alignment.
+Remove identical or similar sequences from a fasta alignment.
 
 Input: Fasta
 
@@ -81,7 +81,6 @@ Requires: BLAST+, ACT and BioPython on your PATH
 	parser.add_argument('input', nargs="+", action="store", help="Specify at least 2 input files")
 
 	parser.add_argument("-o", "--output", action="store", default=False, help="Output file. Default ...")
-	parser.add_argument("-c", "--collapse", action="store_true", default=False, help="Collapse identical sequences, after removing uninformative. A separate file is produced'")
 	parser.add_argument("-t", "--threshold",type=restricted_float, action="store", default="1.0", help="Maximum level  of sequence similarity to collapse 2 seqs'")
 
 
