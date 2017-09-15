@@ -74,7 +74,6 @@ Remove identical or similar sequences from a fasta alignment.
 
 Input: Fasta
 
-Requires: BLAST+, ACT and BioPython on your PATH
 	''', formatter_class=RawTextHelpFormatter)
 
 	#takes in the input files
